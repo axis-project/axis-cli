@@ -1,0 +1,33 @@
+package command
+
+import picocli.CommandLine.{Command, HelpCommand, Option, Parameters}
+
+@Command(name="item", subcommands = Array(classOf[HelpCommand]))
+class Item {
+    @Command
+    def create(@Parameters name: String, @Option(names=Array("--description","-d"), defaultValue = "") description: String): Unit = {
+//        AxisUniverse.create(name, description)
+    }
+
+    @Command
+    def list(): Unit = {
+//        var universes = AxisUniverse.list()
+//        DataUtils.printItems(universes.collect(r => r.toMap()))
+    }
+
+    @Command
+    def show(@Parameters name: String): Unit = {
+//        var universes = AxisUniverse.find(name)
+//        DataUtils.printItems(universes.collect(r => r.toMap()))
+    }
+
+    @Command
+    def delete(@Parameters name: String,  @Option(names=Array("--force","-f"), defaultValue = "false") force : Boolean): Unit = {
+//        AxisUniverse.delete(name)
+    }
+
+    @Command
+    def update(@Parameters name: String, @Option(names = Array("--name")) newName: String, @Option(names = Array("--description", "-d")) newDescription: String): Unit = {
+//        AxisUniverse.update(name, newName, newDescription)
+    }
+}

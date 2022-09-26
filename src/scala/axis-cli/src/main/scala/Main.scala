@@ -1,16 +1,21 @@
-import command.universe
-import command.universe.Universe
+import command.{Item, Universe}
 import picocli.CommandLine
-import picocli.CommandLine.{Command, Option, Parameters, HelpCommand}
+import picocli.CommandLine.Command
 
-@Command(name = "axis-cli", subcommands = Array(classOf[Universe]))
-class AxisCLI {
+@Command(name = "axis-cli", subcommands = Array(classOf[Universe], classOf[Item]))
+class Main
 
-}
 
-object AxisCLI {
+object Main {
     def main(args: Array[String]): Unit = {
-        val exitCode: Int = new CommandLine(new AxisCLI()).execute(args: _*)
-        System.exit(exitCode)
+        var exitCode: Int = 0
+        try {
+            exitCode = new CommandLine(new Main()).execute(args: _*)
+        } catch {
+            case _: Exception => exitCode = -1
+        } finally {
+            System.exit(exitCode)
+        }
     }
 }
+
