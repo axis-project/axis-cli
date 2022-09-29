@@ -1,7 +1,7 @@
 # !/usr/bin/env bats
 
 setup() {
-    rm $AXIS_HOME/axis.db || true
+    rm $AXIS_HOME/*.db || true
     load 'test_helper/bats-support/load'
     load 'test_helper/bats-assert/load'
 }
@@ -41,13 +41,13 @@ setup() {
 @test "axis item create with options" {
     run $AXIS_COMMAND universe create "Main Universe"
     assert_success
-    run $AXIS_COMMAND item create "Save the universe" --universe "Main Universe" --description "This is a description" --priority 1 --due "2000-01-01 01:00:00 -0700"
+    run $AXIS_COMMAND item create "Save the universe" --universe "Main Universe" --description "This is a description" --priority 1 --due "2000-01-01T01:30:55-07:00"
     assert_success
     run $AXIS_COMMAND item list
     assert_success
     assert_output --partial "Save the universe"
     assert_output --partial "This is a description"
-    assert_output --partial "2000-01-01 01:00:00 -0700"
+    assert_output --partial "2000-01-01T01:30:55-07:00"
 }
 
 @test "axis item create with invalid due format" {
@@ -143,14 +143,14 @@ setup() {
     assert_success
     run $AXIS_COMMAND item create "Save the Universe" --universe "Main Universe"
     assert_success
-    run $AXIS_COMMAND item update 1 --title "Make some coffee" --description "This is a description" --priority 1 --due "2000-01-01 01:00:00 -0700"
+    run $AXIS_COMMAND item update 1 --title "Make some coffee" --description "This is a description" --priority 1 --due "2000-01-01T01:30:55-07:00"
     assert_success
     run $AXIS_COMMAND item show 1
     assert_success
     assert_output --partial "Make some coffee"
     refute_output --partial "Save the universe"
     assert_output --partial "This is a description"
-    assert_output --partial "2000-01-01 01:00:00 -0700"
+    assert_output --partial "2000-01-01T01:30:55-07:00"
 }
 
 @test "axis item move with no universe" {
