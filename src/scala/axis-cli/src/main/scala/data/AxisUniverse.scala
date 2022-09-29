@@ -22,6 +22,7 @@ class UniverseEntity(tag: Tag) extends Table[AxisUniverse](tag, "Universe") {
 
 object AxisUniverse {
     val universes = TableQuery[UniverseEntity]
+    val printFields = Array("id", "name", "description")
 
     def create(name: String, description: String): Unit = {
         Await.result(DataUtils.db.run(

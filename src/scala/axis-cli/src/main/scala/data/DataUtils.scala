@@ -9,15 +9,17 @@ object DataUtils {
 
     Await.result(DataUtils.db.run(DBIO.seq(
         AxisUniverse.universes.schema.createIfNotExists,
+        AxisItem.items.schema.createIfNotExists,
     )), Duration.Inf)
 
-    def printNonEmptyItems(items: Seq[Map[String,Any]]): Unit = {
-        items.head.foreach(t => print(s"${t._1}\t\t"))
+    def printNonEmptyItems(items: Seq[Map[String,Any]], fields: Array[String]): Unit = {
+        fields.foreach(t => print(s"${t}\t\t"))
         println()
-        items.head.foreach(_ => print("___________\t\t"))
+        fields.foreach(_ => print("___________\t\t"))
         println()
+        assert(items.nonEmpty, "Empty print result")
         items.foreach(map => {
-            map.foreach (t => print(s"${t._2}\t\t"))
+            fields.foreach (k => print(s"${map(k)}\t\t"))
             println()
         })
     }

@@ -14,14 +14,14 @@ class Universe {
     def list(): Unit = {
         var universes = AxisUniverse.list()
         if (universes.nonEmpty) {
-            DataUtils.printNonEmptyItems(universes.collect(r => r.toMap()))
+            DataUtils.printNonEmptyItems(universes.collect(r => r.toMap()), AxisUniverse.printFields)
         }
     }
 
     @Command
     def show(@Parameters name: String): Unit = {
         var universes = AxisUniverse.find(name)
-        DataUtils.printNonEmptyItems(universes.collect(r => r.toMap()))
+        DataUtils.printNonEmptyItems(universes.collect(r => r.toMap()), AxisUniverse.printFields)
     }
 
     @Command
