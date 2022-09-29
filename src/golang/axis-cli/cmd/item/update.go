@@ -39,7 +39,7 @@ to quickly create a Cobra application.`,
 			newTimeDue = time.Time{}
 			err = nil
 		} else {
-			newTimeDue, err = time.Parse("2006-01-02 15:04:05 -0700", newTimeDueStr)
+			newTimeDue, err = time.Parse("2006-01-02T15:04:05-07:00", newTimeDueStr)
 		}
 		if err != nil {
 			return err
