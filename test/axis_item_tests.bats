@@ -48,7 +48,7 @@ setup() {
     assert_output --partial "Save the universe"
     assert_output --partial "This is a description"
     assert_output --partial "2000-01-01"
-    assert_output --partial "01:30:55"
+    assert_output --partial ":30:55"
 }
 
 @test "axis item create with invalid due format" {
@@ -152,7 +152,7 @@ setup() {
     refute_output --partial "Save the universe"
     assert_output --partial "This is a description"
     assert_output --partial "2000-01-01"
-    assert_output --partial "01:30:55"
+    assert_output --partial ":30:55"
 }
 
 @test "axis item move with no universe" {
